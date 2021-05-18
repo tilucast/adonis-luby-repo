@@ -5,11 +5,18 @@ import UpdateUserValidator from 'App/Validators/UpdateUserValidator'
 
 export default class UsersController {
   public async index() {
-    return await User.query() // User.all()
+    return await User.query().preload('repositories') // User.all()
   }
 
-  public async show({ params }: HttpContextContract) {
-    return await User.findByOrFail('username', params.id) // I am not going to redefine the default standard to have id as the params for show, so, id here is the username.
+  public async show({ params, response }: HttpContextContract) {
+    const userData = await User.query().where('username', params.id).preload('repositories')
+
+    if (!userData.length) {
+      return response.notFound({ message: 'User not found.' })
+    }
+
+    return userData
+    // I am not going to redefine the default standard to have id as the params for show, so, id here is the username.
   }
 
   public async store({ request }: HttpContextContract) {
