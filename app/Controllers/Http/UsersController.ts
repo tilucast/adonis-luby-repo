@@ -16,7 +16,7 @@ export default class UsersController {
     }
 
     return userData
-    // I am not going to redefine the default standard to have id as the params for show, so, id here is the username.
+    // I'm not going to redefine the default standard to have id as the params for show, so, id here is actually the username.
   }
 
   public async store({ request }: HttpContextContract) {

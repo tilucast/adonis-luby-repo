@@ -26,6 +26,7 @@ Route.get('/', async () => {
 
 Route.group(() => {
   Route.resource('users', 'UsersController')
+  Route.resource('users/followers', 'FollowersController')
   Route.resource('repositories', 'RepositoriesController')
   Route.post('login', 'AuthenticateUsersController')
 })

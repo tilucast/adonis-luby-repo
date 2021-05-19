@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, hasMany, HasMany, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Repository from './Repository'
+import Follower from './Follower'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -29,6 +30,9 @@ export default class User extends BaseModel {
 
   @hasMany(() => Repository)
   public repositories: HasMany<typeof Repository>
+
+  @manyToMany(() => Follower)
+  public followers: ManyToMany<typeof Follower>
 
   @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
