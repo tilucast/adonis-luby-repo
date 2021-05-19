@@ -1,16 +1,31 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Follower from 'App/Models/Follower'
+import User from 'App/Models/User'
 
 export default class FollowersController {
-  public async index({}: HttpContextContract) {}
+  public async index({ request }: HttpContextContract) {
+    const { username } = request.qs()
 
-  public async show({}: HttpContextContract) {}
+    const userFollowers = await User.query()
+      .select(['followers.username'])
+      .where('users.username', username)
+      .innerJoin('follower_user', 'users.id', 'follower_user.user_id')
+      .innerJoin('followers', 'follower_user.follower_id', 'followers.follower_id')
 
-  public async store({ request }: HttpContextContract) {
-    const { username, userid } = request.headers()
+    return { followers: userFollowers, count: userFollowers.length }
+  }
+
+  public async store({ request, response }: HttpContextContract) {
+    const { userid } = request.headers()
     const { followeeId } = request.qs()
-    const followerTableData = { username: String(username), followerId: Number(userid) }
-    const followPivotTableData = { followerId: Number(userid), followeeId: Number(followeeId) }
-    console.log(followerTableData, followPivotTableData)
+
+    const user = await User.find(followeeId)
+    const follower = await User.find(userid)
+    if (!follower || !user) {
+      return response.notFound({ error: 'User not found.' })
+    }
+
+    await user?.related('followers').sync([follower.id], false)
+
+    return { followerId: follower.id, followeeId: user.id }
   }
 }

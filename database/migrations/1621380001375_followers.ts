@@ -7,7 +7,7 @@ export default class Followers extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('username').notNullable().unique()
-      table.integer('followerId').notNullable().unique()
+      table.integer('follower_id').notNullable().unique()
       table.timestamps(true)
     })
   }

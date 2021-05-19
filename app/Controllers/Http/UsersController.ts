@@ -1,4 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Follower from 'App/Models/Follower'
 import User from 'App/Models/User'
 import CreateUserValidator from 'App/Validators/CreateUserValidator'
 import UpdateUserValidator from 'App/Validators/UpdateUserValidator'
@@ -22,7 +23,11 @@ export default class UsersController {
   public async store({ request }: HttpContextContract) {
     const user = await request.validate(CreateUserValidator)
 
-    await User.firstOrCreate(user)
+    const createdUser = await User.firstOrCreate(user)
+    await Follower.firstOrCreate({
+      username: user.username,
+      followerId: createdUser.id,
+    })
 
     return { message: 'User created successfully.' }
   }
