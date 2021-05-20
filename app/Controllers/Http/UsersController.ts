@@ -1,8 +1,10 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Follower from 'App/Models/Follower'
 import User from 'App/Models/User'
+import FollowService from 'App/services/FollowService'
 import CreateUserValidator from 'App/Validators/CreateUserValidator'
 import UpdateUserValidator from 'App/Validators/UpdateUserValidator'
+const FollowServiceClass = new FollowService()
 
 export default class UsersController {
   public async index() {
@@ -10,13 +12,27 @@ export default class UsersController {
   }
 
   public async show({ params, response }: HttpContextContract) {
-    const userData = await User.query().where('username', params.id).preload('repositories')
+    const userData = await User.query()
+      .where('username', params.id)
+      .preload('repositories')
+      .withCount('repositories')
 
     if (!userData.length) {
       return response.notFound({ message: 'User not found.' })
     }
 
-    return userData
+    const followers = await FollowServiceClass.getUserFollowers(params.id)
+    const followees = await FollowServiceClass.getUserFollowees(userData[0].id)
+
+    const result = {
+      ...userData[0].$attributes,
+      ...userData[0].$preloaded,
+      ...userData[0].$extras,
+      followers,
+      followees,
+    }
+
+    return result
     // I'm not going to redefine the default standard to have id as the params for show, so, id here is actually the username.
   }
 

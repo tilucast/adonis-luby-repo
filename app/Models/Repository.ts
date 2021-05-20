@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import RepoStar from './RepoStar'
 
 export default class Repository extends BaseModel {
   @column({ isPrimary: true })
@@ -27,6 +28,9 @@ export default class Repository extends BaseModel {
 
   @column()
   public userId: number
+
+  @hasMany(() => RepoStar)
+  public repo_stars: HasMany<typeof RepoStar>
 
   @column.dateTime({ autoCreate: true, serializeAs: null })
   public createdAt: DateTime

@@ -28,6 +28,9 @@ Route.group(() => {
   Route.resource('users', 'UsersController')
   Route.resource('followers', 'FollowersController')
   Route.resource('following', 'FolloweesController')
+
   Route.resource('repositories', 'RepositoriesController')
+  Route.resource('repositories/stars', 'RepoStarsController')
+
   Route.post('login', 'AuthenticateUsersController')
 })

@@ -1,17 +1,13 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
+import FollowService from 'App/services/FollowService'
+const FollowServiceClass = new FollowService()
 
 export default class FollowersController {
   public async index({ request }: HttpContextContract) {
     const { username } = request.qs()
 
-    const userFollowers = await User.query()
-      .select(['followers.username'])
-      .where('users.username', username)
-      .innerJoin('follower_user', 'users.id', 'follower_user.user_id')
-      .innerJoin('followers', 'follower_user.follower_id', 'followers.follower_id')
-
-    return { followers: userFollowers, count: userFollowers.length }
+    return FollowServiceClass.getUserFollowers(username)
   }
 
   public async store({ request, response }: HttpContextContract) {
