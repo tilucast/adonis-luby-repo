@@ -2,6 +2,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Repository from 'App/Models/Repository'
 import User from 'App/Models/User'
 import CreateUserRepositoryValidator from 'App/Validators/CreateUserRepositoryValidator'
+import UpdateRepositoryValidator from 'App/Validators/UpdateRepositoryValidator'
 
 export default class RepositoriesController {
   public async index({ request, response }: HttpContextContract) {
@@ -55,6 +56,15 @@ export default class RepositoriesController {
     const slug = `${userRepo.name}-${user.username}`
     const finalUserData = { ...userRepo, slug, userId }
     return await Repository.create(finalUserData)
+  }
+
+  public async update({ params, request }: HttpContextContract) {
+    const { id } = params
+    const body = await request.validate(UpdateRepositoryValidator)
+
+    const updatedRepo = await Repository.updateOrCreate({ id }, body)
+
+    return updatedRepo
   }
 
   public async destroy({ params }: HttpContextContract) {

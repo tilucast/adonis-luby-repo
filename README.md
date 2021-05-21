@@ -1,6 +1,9 @@
 Olá.
+
 Pasta codechallenges => algoritmos
+
 pasta web => react , feito anteriormente. Repositório original: https://github.com/tilucast/luby-repo, live version: https://shitty-github-clone.vercel.app/
+
 pasta node => node com adonis
 
 ### Node
@@ -25,17 +28,25 @@ Todos os endpoints de update ou create estão sendo validados.
 #### Crud de users
 
 GET /users => todos os usuários cadastrados.
+
 GET /users/users.username => retorna informações condizentes com a página de usuário disponibilizado no protótipo/ buscar usuário no banco pelo username.
+
 PUT /users/users.id => atualizar informações do usuário.
+
 POST /users => cadastrar um usuário.
+
 DELETE /users/users.id => deletar um usuário.
 
 ### Crud de repos
 
 GET /repositories, QUERY userId = users.id => retorna informações condizentes com a página de repositórios do usuário.
+
 GET /repositories/repositories.name => retorna informações de um repo específico pelo nome.
+
 PUT /repositories/repositories.id => atualizar informações do repositório.
+
 POST /repositories, QUERY userId = users.id => cadastrar um repositório.
+
 DELETE /repositories/repositories.id => deletar um repositório.
 
 ### Login
@@ -52,6 +63,7 @@ que não faria o menor sentido.
 Em following, existem read e delete, visto que updates não fariam sentido.
 
 GET /following, QUERY id = follower_user.follower_id => retorna todos os usuários que um usuário específico está seguindo.
+
 GET /followers, QUERY username = users.username => retorna todos os usuários que seguem um usuário específico.
 
 POST /followers, QUERY followeeId = follower_user.follower_id ou user_id (id do usuário a ser seguido), HEADERS = {username: users.username, userId: users.id} => seguir um usuario.
