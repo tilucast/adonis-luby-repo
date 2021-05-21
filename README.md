@@ -25,6 +25,38 @@ Todos os endpoints de update ou create estão sendo validados.
 
 ---
 
+## Instalando as dependências e rodando o projeto
+
+Por precaução vou listar os passos para instalar as dependências e rodar o projeto.
+
+npm i => instalar as dependências,
+
+node ace configure @adonisjs/lucid => configurar o necessário pro Lucid rodar no projeto.
+
+Se por acaso a aplicação der erro en variáveis de ambiente, é possível que o comando não tenha as criado em .env. Verifique .env e .env.example e veja se
+as configurações se parecem com isso:
+
+````
+
+PORT=3333
+HOST=0.0.0.0
+NODE_ENV=development
+APP_KEY=jujZfxgTu1UfASy-VNHWLwnkD-qL0QFI
+DB_CONNECTION=sqlite
+
+
+````
+
+npm run dev / node ace serve --watch => roda o servidor.
+
+node ace migration:run => roda as migrations e cria o arquivo do banco em /tmp.
+
+#### Observações
+
+Vou citar novamente, o arquivo json do insomnia foi upado em /node. Caso tenha problemas em ler e identificar as rotas, upe o arquivo em seu próprio insomnia e use as rotas já definidas como exemplo.
+
+---
+
 #### Crud de users
 
 GET /users => todos os usuários cadastrados.
