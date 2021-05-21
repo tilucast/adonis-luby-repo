@@ -17,6 +17,7 @@ porém, usando Lucid, não é possível. Devo ter cometido algum erro na hora de
 outras relações estão corretas.
 
 Acredito que devam existir erros no projeto. Erros esses que não consegui identificar devido ao tempo limitado.
+Caso encontre algum erro, perdão por isso.
 
 No banco não existe uma tabela de "following". Apenas User e Follower, e uma tabela pivot pra fazer as queries.
 Todos os cruds que fazem sentido existir, foram codados. Vou listar abaixo as rotas, e o retorno das mesmas.
@@ -32,6 +33,7 @@ Por precaução vou listar os passos para instalar as dependências e rodar o pr
 npm i => instalar as dependências,
 
 node ace configure @adonisjs/lucid => configurar o necessário pro Lucid rodar no projeto.
+Escolha SQLITE como banco de dados, pois foi o banco usado no app.
 
 Se por acaso a aplicação der erro en variáveis de ambiente, é possível que o comando não tenha as criado em .env. Verifique .env e .env.example e veja se
 as configurações se parecem com isso:
@@ -47,9 +49,11 @@ DB_CONNECTION=sqlite
 
 ````
 
-npm run dev / node ace serve --watch => roda o servidor.
+Em caso de erro nas variáveis de ambiente, copie e cole o código acima em .env.
 
 node ace migration:run => roda as migrations e cria o arquivo do banco em /tmp.
+
+npm run dev / node ace serve --watch => roda o servidor.
 
 #### Observações
 
