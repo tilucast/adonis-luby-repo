@@ -35,7 +35,7 @@ npm i => instalar as dependências,
 node ace configure @adonisjs/lucid => configurar o necessário pro Lucid rodar no projeto.
 Escolha SQLITE como banco de dados, pois foi o banco usado no app.
 
-Se por acaso a aplicação der erro en variáveis de ambiente, é possível que o comando não tenha as criado em .env. Verifique .env e .env.example e veja se
+Se por acaso a aplicação der erro em variáveis de ambiente, é possível que o comando não tenha as criado em .env. Verifique .env e .env.example e veja se
 as configurações se parecem com isso:
 
 ````
