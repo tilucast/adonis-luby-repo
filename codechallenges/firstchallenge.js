@@ -1,0 +1,1 @@
+const newArrayBasedOnInputs = (numberOfItems, item) => new Array(numberOfItems).fill(item)

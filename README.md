@@ -2,7 +2,7 @@ Olá.
 
 Pasta codechallenges => algoritmos
 
-pasta web => react , feito anteriormente. Repositório original: https://github.com/tilucast/luby-repo, live version: https://shitty-github-clone.vercel.app/
+projeto react => react , feito anteriormente. Repositório original: https://github.com/tilucast/luby-repo, live version: https://shitty-github-clone.vercel.app/
 
 pasta node => node com adonis
 

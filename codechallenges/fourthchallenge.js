@@ -1,0 +1,1 @@
+const objectOutOfArrayPairs = (array) => Object.fromEntries(array)
